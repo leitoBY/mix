@@ -3,6 +3,7 @@ package net.mix.spring.dao;
 import java.util.List;
 
 import net.mix.spring.model.Department;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     @Override
     public void updateDep(Department dep) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.update(dep);
+        session.merge(dep);
         logger.info("Department updated successfully, Department Details="+dep);
     }
  
@@ -47,7 +48,7 @@ public class DepartmentDAOImpl implements DepartmentDAO {
     public Department getDepbyId(int dept_id) {
         Session session = this.sessionFactory.getCurrentSession();      
         Department dep = (Department) session.load(Department.class, new Integer(dept_id));
-        logger.info("epartment loaded successfully, Department details="+dep);
+        logger.info("Department loaded successfully, Department details="+dep);
         return dep;
     }
  
@@ -60,5 +61,9 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         }
         logger.info("Department deleted successfully, Department details="+dep);
     }
+
+
+
+
 
 }

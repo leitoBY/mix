@@ -1,14 +1,14 @@
 package net.mix.spring.service;
  
 import java.util.List;
- 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
- 
 
 import net.mix.spring.dao.WorkerDAO;
+import net.mix.spring.dto.WorkerDTO;
+import net.mix.spring.dto.WorkerDTOFactory;
 import net.mix.spring.model.Worker;
  
 @Service
@@ -16,39 +16,43 @@ public class WorkerServiceImpl implements WorkerService {
      
     @Autowired
 	private WorkerDAO workerDAO;
- 
-    /*public void setWorkerDAO(WorkerDAO workerDAO) {
-        this.workerDAO = workerDAO;
-    }  */
+    @Autowired
+    private WorkerDTOFactory workerFactory;
  
     @Override
     @Transactional
-    public void addWorker(Worker w) {
-        this.workerDAO.addWorker(w);
+    public void saveWorker(WorkerDTO workerDTO) {
+        
+    	workerDAO.addWorker(workerFactory.createModel(workerDTO));
     }
  
     @Override
     @Transactional
-    public void updateWorker(Worker w) {
-        this.workerDAO.updateWorker(w);
+    public void editWorker(WorkerDTO workerDTO) {
+    	
+        workerDAO.updateWorker(workerFactory.createModel(workerDTO));
     }
  
     @Override
     @Transactional
-    public List<Worker> listWorkers() {
-        return this.workerDAO.listWorkers();
+    public List<WorkerDTO> listWorkers() {
+    	
+    	List<Worker> workers = workerDAO.listWorkers();
+    	return workerFactory.createDTOs(workers);
     }
- 
+    
     @Override
     @Transactional
-    public Worker getWorkerById(int id) {
-        return this.workerDAO.getWorkerById(id);
+    public WorkerDTO getWorker(int workerId) {
+    	
+    	Worker worker = workerDAO.getWorkerById(workerId);
+        return workerFactory.createDTO(worker);
     }
- 
+    
     @Override
     @Transactional
-    public void removeWorker(int id) {
-        this.workerDAO.removeWorker(id);
+    public void deleteWorker(int workerId) {
+        this.workerDAO.removeWorker(workerId);
     }
  
 }

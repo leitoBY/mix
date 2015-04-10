@@ -1,6 +1,8 @@
 package net.mix.spring;
 
-import net.mix.spring.model.Department;
+import java.util.List;
+
+import net.mix.spring.dto.DepartmentDTO;
 import net.mix.spring.service.DepartmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,37 +21,43 @@ public class DepartmentController {
 	
 	@RequestMapping(value = "/departments", method = RequestMethod.GET)
     public String listDeps(Model model) {
-        model.addAttribute("department", new Department());
+		
+		List<DepartmentDTO> list = departmentService.listDeps();
+		for(DepartmentDTO d : list) {
+		departmentService.countSalary(d);
+		}
+		
+        model.addAttribute("department", new DepartmentDTO());
         model.addAttribute("listDeps", this.departmentService.listDeps());
         return "department";
     }
      
     //For add and update person both
     @RequestMapping(value= "/department/add", method = RequestMethod.POST)
-    public String addDep(@ModelAttribute("department") Department dep){
+    public String saveDep(@ModelAttribute("department") DepartmentDTO dep){
          
         if(dep.getDept_id() == 0){
             //new person, add it
-            this.departmentService.addDep(dep);
+            this.departmentService.saveDep(dep);
         }else{
             //existing person, call update
-            this.departmentService.updateDep(dep);
+            this.departmentService.editDep(dep);
         }
          
         return "redirect:/departments";
          
     }
      
-    @RequestMapping("/remove/{dept_id}")
-    public String removeDep(@PathVariable("dept_id") int dept_id){
+    @RequestMapping("department/remove/{dept_id}")
+    public String deleteDep(@PathVariable("dept_id") int dept_id){
          
-        this.departmentService.removeDep(dept_id);
+        this.departmentService.deleteDep(dept_id);
         return "redirect:/departments";
     }
   
-    @RequestMapping("/edit/{dept_id}")
+    @RequestMapping("department/edit/{dept_id}")
     public String editDep(@PathVariable("dept_id") int dept_id, Model model){
-        model.addAttribute("department", this.departmentService.getDepbyId(dept_id));
+        model.addAttribute("department", this.departmentService.getDep(dept_id));
         model.addAttribute("listDeps", this.departmentService.listDeps());
         return "department";
     }

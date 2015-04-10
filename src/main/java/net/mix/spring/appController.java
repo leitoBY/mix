@@ -11,7 +11,7 @@ public class appController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String app() {
         
-		return "department";
+		return "main";
     }
 	
 }

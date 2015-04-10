@@ -1,12 +1,13 @@
 package net.mix.spring.model;
  
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
  
 
@@ -14,13 +15,15 @@ import javax.persistence.Table;
 @Table(name="Worker")
 public class Worker {
  
-    @Id
+
+	@Id
     @Column(name="id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
-    private String first_name;
-    private String last_name;
-    private BigDecimal salary;
+    
+	private int id;
+	private String firstName;
+    private String lastName;
+    private Double salary;
  
     public int getId() {
         return id;
@@ -32,32 +35,47 @@ public class Worker {
  
     
      
-    public String getFirst_name() {
-		return first_name;
+    public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public BigDecimal getSalary() {
+	public Double getSalary() {
 		return salary;
 	}
 
-	public void setSalary(BigDecimal salary) {
+	public void setSalary(Double salary) {
 		this.salary = salary;
 	}
 
 	@Override
     public String toString(){
-        return "id="+id+", firstname="+first_name+", lastname="+last_name+", salary="+salary;
+        return "id="+id+", firstname="+firstName+", lastname="+lastName+", salary="+salary;
     }
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "dept_id", nullable = true)
+    private Department department;
+	
+
+    public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+	
+	
 }

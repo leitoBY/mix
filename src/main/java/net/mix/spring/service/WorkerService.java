@@ -1,15 +1,15 @@
 package net.mix.spring.service;
  
 import java.util.List;
- 
-import net.mix.spring.model.Worker;
+
+import net.mix.spring.dto.WorkerDTO;
  
 public interface WorkerService {
  
-    public void addWorker(Worker w);
-    public void updateWorker(Worker w);
-    public List<Worker> listWorkers();
-    public Worker getWorkerById(int id);
-    public void removeWorker(int id);
+    public void saveWorker(WorkerDTO workerDTO);
+    public void editWorker(WorkerDTO workerDTO);
+    public List<WorkerDTO> listWorkers();
+    public WorkerDTO getWorker(int workerId);
+    public void deleteWorker(int workerId);
      
 }

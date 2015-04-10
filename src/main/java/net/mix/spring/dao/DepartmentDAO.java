@@ -12,4 +12,5 @@ public interface DepartmentDAO {
 	public Department getDepbyId(int dept_id);
 	public void removeDep(int dept_id);
 
+
 }
