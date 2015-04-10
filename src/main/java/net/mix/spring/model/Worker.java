@@ -1,5 +1,7 @@
 package net.mix.spring.model;
  
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,12 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
  
-/**
- * Entity bean with JPA annotations
- * Hibernate provides JPA implementation
- * @author pankaj
- *
- */
+
 @Entity
 @Table(name="Worker")
 public class Worker {
@@ -23,7 +20,7 @@ public class Worker {
     private int id;
     private String first_name;
     private String last_name;
-    private int salary;
+    private BigDecimal salary;
  
     public int getId() {
         return id;
@@ -51,11 +48,11 @@ public class Worker {
 		this.last_name = last_name;
 	}
 
-	public int getSalary() {
+	public BigDecimal getSalary() {
 		return salary;
 	}
 
-	public void setSalary(int salary) {
+	public void setSalary(BigDecimal salary) {
 		this.salary = salary;
 	}
 

@@ -1,7 +1,6 @@
 package net.mix.spring;
  
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,13 +14,14 @@ import net.mix.spring.service.WorkerService;
 @Controller
 public class WorkerController {
      
+    @Autowired
     private WorkerService workerService;
      
-    @Autowired(required=true)
+    /*@Autowired(required=true)
     @Qualifier(value="workerService")
     public void setWorkerService(WorkerService ws){
         this.workerService = ws;
-    }
+    }  */
      
     @RequestMapping(value = "/workers", method = RequestMethod.GET)
     public String listWorkers(Model model) {
@@ -42,7 +42,7 @@ public class WorkerController {
             this.workerService.updateWorker(w);
         }
          
-        return "redirect:/workerss";
+        return "redirect:/workers";
          
     }
      

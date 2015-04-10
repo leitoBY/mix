@@ -2,12 +2,15 @@ package net.mix.spring.dao;
  
 import java.util.List;
  
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
  
+
 import net.mix.spring.model.Worker;
  
 @Repository
@@ -15,11 +18,12 @@ public class WorkerDAOImpl implements WorkerDAO {
      
     private static final Logger logger = LoggerFactory.getLogger(WorkerDAOImpl.class);
  
+    @Autowired
     private SessionFactory sessionFactory;
      
-    public void setSessionFactory(SessionFactory sf){
+   /* public void setSessionFactory(SessionFactory sf){
         this.sessionFactory = sf;
-    }
+    } */
  
     @Override
     public void addWorker(Worker w) {

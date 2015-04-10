@@ -2,20 +2,24 @@ package net.mix.spring.service;
  
 import java.util.List;
  
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
  
+
 import net.mix.spring.dao.WorkerDAO;
 import net.mix.spring.model.Worker;
  
 @Service
 public class WorkerServiceImpl implements WorkerService {
      
-    private WorkerDAO workerDAO;
+    @Autowired
+	private WorkerDAO workerDAO;
  
-    public void setWorkerDAO(WorkerDAO workerDAO) {
+    /*public void setWorkerDAO(WorkerDAO workerDAO) {
         this.workerDAO = workerDAO;
-    }
+    }  */
  
     @Override
     @Transactional
