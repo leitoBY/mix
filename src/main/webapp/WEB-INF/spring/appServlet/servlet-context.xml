@@ -40,6 +40,7 @@
         <beans:property name="annotatedClasses">
             <beans:list>
                 <beans:value>net.mix.spring.model.Worker</beans:value>
+                <beans:value>net.mix.spring.model.Department</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -50,13 +51,10 @@
             </beans:props>
         </beans:property>
     </beans:bean>
+    
+    
      
-    <beans:bean id="workerDAO" class="net.mix.spring.dao.WorkerDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-    </beans:bean>
-    <beans:bean id="personService" class="net.mix.spring.service.WorkerServiceImpl">
-        <beans:property name="workerDAO" ref="workerDAO"></beans:property>
-    </beans:bean>
+    
     <context:component-scan base-package="net.mix.spring" />
      
     <tx:annotation-driven transaction-manager="transactionManager"/>
